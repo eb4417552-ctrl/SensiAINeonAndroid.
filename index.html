@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b0a">
+<title>SENSI AI NEON</title>
+<style>
+:root{--bg:#070a09;--panel:#101613;--panel2:#141d18;--line:#26362c;--green:#7cff6b;--green2:#b4ff9b;--muted:#a2b2a7;--white:#f2fff4;--warn:#ffd166;--red:#ff7b7b}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#102016 0%,var(--bg) 48%);color:var(--white);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:980px;margin:auto;padding:20px 14px 46px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 22px}
+.logo{display:flex;align-items:center;gap:10px}.mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#b4ff9b,#39d76b);color:#061008;font-weight:1000;font-size:23px;box-shadow:0 0 24px #57ff7b33}
+h1{font-size:20px;line-height:1.1;margin:0;letter-spacing:1.4px}h1 span{color:var(--green)}.sub{font-size:12px;color:var(--muted);margin-top:5px}
+.pill{border:1px solid #31563a;border-radius:999px;padding:6px 10px;color:var(--green2);font-size:11px;white-space:nowrap}
+.hero{padding:22px;border:1px solid #2b4532;border-radius:22px;background:linear-gradient(120deg,#14231a,#0e1410);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:180px;height:180px;border:1px solid #7cff6b1a;border-radius:50%;right:-55px;top:-65px;box-shadow:0 0 0 20px #7cff6b08,0 0 0 42px #7cff6b06}
+.eyebrow{color:var(--green);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+h2{font-size:24px;line-height:1.18;margin:8px 0}.hero p{color:#c2d0c6;max-width:650px;margin:0 0 16px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;position:relative;z-index:1}
+button,.btn{border:1px solid #35513c;background:#17231a;color:var(--white);padding:11px 14px;border-radius:12px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:7px}
+button.primary{background:var(--green);border-color:var(--green);color:#061008}button:hover,.btn:hover{filter:brightness(1.12)}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.card{border:1px solid var(--line);background:linear-gradient(180deg,#111813,#0d120f);border-radius:18px;padding:17px;min-width:0}
+.card h3{font-size:16px;margin:0 0 5px}.desc{font-size:12px;color:var(--muted);margin:0 0 14px}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.tag{font-size:10px;color:var(--green);border:1px solid #2b5534;padding:4px 8px;border-radius:999px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.stat{padding:11px;background:#0a0f0c;border:1px solid #202e24;border-radius:12px;min-width:0}
+.stat .k{font-size:11px;color:var(--muted)}.stat .v{font-size:15px;font-weight:800;margin-top:3px;overflow-wrap:anywhere}
+.notice{padding:11px 12px;border-radius:12px;background:#141b15;border:1px solid #34452f;color:#c7d5ca;font-size:12px;margin-top:12px}
+.notice.warn{border-color:#66512b;background:#211b10;color:#ffe6a4}
+label{display:block;font-size:12px;color:#bdcbbf;margin:11px 0 5px}
+input[type=text],select{width:100%;background:#080d0a;border:1px solid #2b3b30;border-radius:10px;padding:10px;color:var(--white);font:inherit}
+input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
+.rangehead{display:flex;justify-content:space-between;gap:10px;font-size:12px}.rangehead strong{color:var(--green);font-variant-numeric:tabular-nums}
+.control{padding:9px 0;border-bottom:1px solid #1c2920}.control:last-child{border-bottom:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.profilelist{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.profilechip{border:1px solid #34533a;background:#142019;color:#dfffe1;padding:7px 10px;border-radius:999px;font-size:12px}
+.status{font-size:12px;color:var(--muted);margin-top:9px;min-height:18px}
+.small{font-size:11px;color:var(--muted)}.green{color:var(--green)}.value-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.value{padding:10px;border:1px solid #27372b;border-radius:11px;background:#0a100c}.value .k{font-size:11px;color:var(--muted)}.value .v{font-size:21px;font-weight:900;color:var(--green)}
+footer{margin-top:18px;text-align:center;color:#819187;font-size:11px}
+hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+@media(max-width:680px){.grid{grid-template-columns:1fr}.wrap{padding:14px 12px 34px}.hero{padding:18px}.hero h2{font-size:22px}header{align-items:flex-start}.pill{font-size:10px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo"><div class="mark">N</div><div><h1>SENSI <span>AI NEON</span></h1><div class="sub">LABORATORIO DE SENSIBILIDAD · BETA WEB</div></div></div>
+  <div class="pill">● MODO SEGURO</div>
+</header>
+<section class="hero">
+  <div class="eyebrow">Tu teléfono · Tu estilo · Tu configuración</div>
+  <h2>Encuentra una sensibilidad<br><span class="green">hecha para ti.</span></h2>
+  <p>Escanea lo que tu navegador puede detectar, genera un perfil inicial y guárdalo para probarlo en el juego. No cambia ajustes del sistema ni modifica Free Fire.</p>
+  <div class="actions"><button class="primary" id="scanBtn">⌕ Escanear mi teléfono</button><button id="generateTop">✦ Generar sensibilidad</button></div>
+</section>
+
+<div class="grid">
+<section class="card">
+  <div class="section-title"><h3>01 / Escáner del dispositivo</h3><span class="tag">LECTURA LOCAL</span></div>
+  <p class="desc">Solo consulta información disponible desde este navegador.</p>
+  <div class="stats" id="deviceStats">
+    <div class="stat"><div class="k">Dispositivo / navegador</div><div class="v">Sin escanear</div></div>
+    <div class="stat"><div class="k">Pantalla</div><div class="v">—</div></div>
+    <div class="stat"><div class="k">RAM aproximada</div><div class="v">No disponible</div></div>
+    <div class="stat"><div class="k">Núcleos lógicos</div><div class="v">No disponible</div></div>
+    <div class="stat"><div class="k">Densidad del navegador</div><div class="v">—</div></div>
+    <div class="stat"><div class="k">Batería</div><div class="v">No consultada</div></div>
+  </div>
+  <div class="notice" id="scanNote">Pulsa “Escanear mi teléfono”. El navegador puede ocultar algunos datos por privacidad.</div>
+  <button id="batteryBtn" style="margin-top:10px">Consultar batería (si es compatible)</button>
+  <div class="status" id="scanStatus" role="status"></div>
+</section>
+
+<section class="card">
+  <div class="section-title"><h3>02 / Tu estilo de juego</h3><span class="tag">PERSONALIZACIÓN</span></div>
+  <p class="desc">Estas respuestas ayudan a calcular un punto de partida; no garantizan resultados perfectos.</p>
+  <label for="style">Estilo principal</label>
+  <select id="style"><option value="balanced">Equilibrado</option><option value="drag">Arrastre rápido / mira rápida</option><option value="precision">Precisión y control</option><option value="close">Combates cercanos</option></select>
+  <div class="two">
+    <div><label for="fps">Fluidez habitual</label><select id="fps"><option value="stable">Fluida / estable</option><option value="mixed">A veces se traba</option><option value="low">Baja o irregular</option></select></div>
+    <div><label for="touch">Respuesta táctil</label><select id="touch"><option value="normal">Normal</option><option value="slow">Se siente lenta</option><option value="fast">Muy sensible</option></select></div>
+  </div>
+  <label for="dpiMode">Modo DPI</label>
+  <select id="dpiMode"><option value="both">Comparar: DPI original y personalizado</option><option value="stock">Solo DPI original (recomendado)</option><option value="custom">Probar con DPI personalizado</option></select>
+  <label for="dpiInput">DPI actual o deseado (opcional)</label>
+  <input id="dpiInput" type="text" inputmode="numeric" placeholder="Ej. 420 — dato manual, no se detecta automáticamente">
+  <div class="notice">El navegador no puede leer ni cambiar el DPI real de Android. Este campo es una nota que tú escribes; la app no tocará los ajustes del teléfono.</div>
+  <label for="hud">Tamaño del botón de disparo en el juego (opcional)</label>
+  <div class="rangehead"><span>Más pequeño</span><strong id="hudVal">48%</strong><span>Más grande</span></div>
+  <input id="hud" type="range" min="20" max="100" value="48">
+</section>
+
+<section class="card">
+  <div class="section-title"><h3>03 / Generador de sensibilidad</h3><span class="tag">PERFIL INICIAL</span></div>
+  <p class="desc">Rango máximo configurado: 200, como indicas para la versión actual de Free Fire. Los valores son sugerencias de partida, no ajustes oficiales de Garena.</p>
+  <label for="profileName">Nombre del perfil</label><input id="profileName" type="text" value="Mi perfil NEON" maxlength="32">
+  <div id="ranges"></div>
+  <div class="actions" style="margin-top:14px"><button class="primary" id="generateBtn">✦ Generar con mis datos</button><button id="resetBtn">Restablecer</button></div>
+  <div class="value-grid" id="output"></div>
+  <div class="notice" id="recommendation">Escanea el dispositivo y genera una sensibilidad para ver aquí tu recomendación.</div>
+  <div class="status" id="genStatus" role="status"></div>
+</section>
+
+<section class="card">
+  <div class="section-title"><h3>04 / Perfiles guardados</h3><span class="tag">EN ESTE NAVEGADOR</span></div>
+  <p class="desc">Guarda, carga, exporta o importa perfiles. Los datos permanecen localmente en este navegador.</p>
+  <div class="actions"><button class="primary" id="saveBtn">Guardar perfil actual</button><button id="exportBtn">Exportar JSON</button></div>
+  <label for="importFile">Importar perfil exportado</label><input id="importFile" type="file" accept=".json,application/json">
+  <div id="profiles" class="profilelist"></div>
+  <div id="profileStatus" class="status" role="status">Todavía no hay perfiles guardados.</div>
+  <hr>
+  <h3>Actualizaciones oficiales</h3>
+  <p class="desc">Revisa las notas de versión directamente en Garena. Esta demo no puede garantizar una comprobación automática de versión desde una web externa.</p>
+  <div class="notice"><strong class="green">Última referencia revisada:</strong> OB55 · 10 sep 2026 (sitio oficial consultado al crear esta demo). Verifica si hay una nota más reciente antes de ajustar tu perfil.</div>
+  <div class="actions" style="margin-top:12px"><a class="btn" href="https://ff.garena.com/en" target="_blank" rel="noopener noreferrer">Abrir web oficial ↗</a><a class="btn" href="https://ff.garena.com/en/news/" target="_blank" rel="noopener noreferrer">Noticias / parches ↗</a></div>
+</section>
+</div>
+<section class="card" style="margin-top:14px">
+  <div class="section-title"><h3>05 / Instalar en tu pantalla de inicio</h3><span class="tag">ACCESO RÁPIDO</span></div>
+  <p class="desc">Este archivo es una web local, no un APK. Si la abres desde una dirección web segura (HTTPS), algunos navegadores permiten instalarla o añadirla a la pantalla de inicio desde el menú del navegador. Abrir el archivo descargado directamente no siempre ofrece esa opción.</p>
+  <div class="notice warn">Para crear una app Android instalable como APK necesitamos empaquetar esta web con una herramienta de Android y firmar el paquete. Este HTML por sí solo no se puede instalar como una app APK.</div>
+</section>
+<footer>SENSI AI NEON · Prototipo local. No está afiliado con Garena. No requiere iniciar sesión ni compartir datos personales.</footer>
+</div>
+<script>
+const keys=[
+  {id:"general",name:"General",value:175},
+  {id:"red",name:"Mira de punto rojo",value:165},
+  {id:"x2",name:"Mira 2x",value:150},
+  {id:"x4",name:"Mira 4x",value:130},
+  {id:"sniper",name:"Mira francotirador",value:85},
+  {id:"free",name:"Vista libre",value:110}
+];
+const $=id=>document.getElementById(id);
+let lastDevice=null;
+function makeRanges(values){
+  $("ranges").innerHTML="";
+  keys.forEach(k=>{
+    const val=values?.[k.id] ?? k.value;
+    const div=document.createElement("div");div.className="control";
+    const label=document.createElement("div");label.className="rangehead";
+    label.innerHTML=`<span>${k.name}</span><strong id="${k.id}Val">${val}</strong>`;
+    const input=document.createElement("input");input.type="range";input.min="0";input.max="200";input.value=val;input.id=k.id;
+    input.addEventListener("input",()=>{$(k.id+"Val").textContent=input.value;renderOutput();});
+    div.append(label,input);$("ranges").append(div);
+  });renderOutput();
+}
+function currentValues(){const out={};keys.forEach(k=>out[k.id]=Number($(k.id).value));return out}
+function renderOutput(){
+  $("output").innerHTML="";
+  keys.forEach(k=>{const el=document.createElement("div");el.className="value";el.innerHTML=`<div class="k">${k.name}</div><div class="v">${$(k.id)?.value ?? k.value}</div>`;$("output").append(el)});
+}
+function stat(k,v){return `<div class="stat"><div class="k">${k}</div><div class="v">${v}</div></div>`}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function scan(){
+ const nav=navigator, scr=screen;
+ let ua=nav.userAgent||"No informado";
+ let browser= /Android/i.test(ua)?"Android (navegador)":/iPhone|iPad/i.test(ua)?"iOS (navegador)": "Dispositivo detectado por navegador";
+ const model=(ua.match(/;\s*([^;)]+)\s*Build\//i)||[])[1];
+ const screenTxt=`${scr.width||"?"} × ${scr.height||"?"} CSS px`;
+ const ram=nav.deviceMemory?`≈ ${nav.deviceMemory} GB (estimación del navegador)`:"No disponible en este navegador";
+ const cores=nav.hardwareConcurrency?`${nav.hardwareConcurrency} hilos lógicos (no núcleos físicos)`:"No disponible";
+ const dpr=window.devicePixelRatio?`${window.devicePixelRatio}× (escala del navegador)`:"No disponible";
+ $("deviceStats").innerHTML=
+ stat("Sistema / navegador",browser)+stat("Modelo (si se expone)",model||"No expuesto")+
+ stat("Pantalla",screenTxt)+stat("RAM aproximada",ram)+stat("Núcleos lógicos",cores)+stat("Escala de pantalla",dpr);
+ lastDevice={browser,model:model||null,screen:screenTxt,ram:nav.deviceMemory||null,cores:nav.hardwareConcurrency||null,dpr:window.devicePixelRatio||null,userAgent:ua};
+ $("scanNote").textContent="Escaneo completado. Se leyó información del navegador; no se accedió a archivos, aplicaciones ni procesos privados.";
+ $("scanStatus").textContent="Escaneo local terminado · "+new Date().toLocaleString();
+}
+async function battery(){
+ if(!navigator.getBattery){$("scanStatus").textContent="La API de batería no es compatible aquí; no se puede consultar.";return}
+ try{const b=await navigator.getBattery();const pct=Math.round(b.level*100);const txt=`${pct}% · ${b.charging?"cargando":"sin cargar"}`;
+ const box=document.createElement("div");box.className="stat";box.innerHTML=`<div class="k">Batería (API disponible)</div><div class="v">${esc(txt)}</div>`;
+ $("deviceStats").append(box);$("scanStatus").textContent="Dato de batería consultado. La compatibilidad depende del navegador.";
+ }catch(e){$("scanStatus").textContent="El navegador bloqueó o no permitió consultar la batería."}
+}
+function generate(){
+ let base={general:175,red:165,x2:150,x4:130,sniper:85,free:110};
+ const style=$("style").value, fps=$("fps").value, touch=$("touch").value;
+ if(style==="drag"){base.general+=10;base.red+=10;base.x2+=5}
+ if(style==="precision"){base.general-=12;base.red-=10;base.x2-=8;base.x4-=6;base.sniper-=5}
+ if(style==="close"){base.general+=8;base.red+=7;base.free+=5}
+ if(fps==="low"){base.general-=4;base.red-=4;base.x2-=5}
+ if(fps==="mixed"){base.general-=2;base.red-=2}
+ if(touch==="slow"){base.general+=5;base.red+=4}
+ if(touch==="fast"){base.general-=7;base.red-=6;base.x2-=4}
+ // DPR and screen information only guide small, conservative starting adjustments.
+ if(lastDevice && lastDevice.dpr>=3){base.general-=2;base.red-=2}
+ Object.keys(base).forEach(k=>base[k]=Math.max(0,Math.min(200,base[k])));
+ makeRanges(base);
+ const mode=$("dpiMode").value, dpi=$("dpiInput").value.trim();
+ let modeText=mode==="stock"?"DPI original":mode==="custom"?"Modo DPI personalizado (valor manual)":"Comparación de DPI original y personalizado";
+ let explanation=style==="drag"?"Prioriza movimientos rápidos; baja General en pasos pequeños si la mira se pasa.":style==="precision"?"Prioriza control; aumenta poco a poco si la mira se siente lenta.":style==="close"?"Prioriza giros rápidos para distancias cortas; prueba sin cambiar todos los valores a la vez.":"Perfil equilibrado para empezar y ajustar en el campo de entrenamiento.";
+ if(fps!=="stable")explanation+=" Si hay tirones, revisa primero la fluidez del teléfono: la sensibilidad no arregla las caídas de FPS.";
+ $("recommendation").innerHTML=`<strong class="green">Modo:</strong> ${esc(modeText)}${dpi?` · <strong>DPI anotado:</strong> ${esc(dpi)}`:""}<br>${esc(explanation)} <br><span class="small">Prueba en entrenamiento y modifica solo 3–5 puntos cada vez. Este cálculo es heurístico, no un modelo de IA conectado ni una promesa de headshots.</span>`;
+ $("genStatus").textContent="Configuración inicial generada. Puedes ajustar manualmente cada control.";
+}
+function profileData(){return {app:"SENSI AI NEON",schema:1,name:$("profileName").value.trim()||"Perfil sin nombre",created:new Date().toISOString(),values:currentValues(),settings:{style:$("style").value,fps:$("fps").value,touch:$("touch").value,dpiMode:$("dpiMode").value,dpiNote:$("dpiInput").value,hud:Number($("hud").value)},device:lastDevice}}
+function readProfiles(){try{return JSON.parse(localStorage.getItem("sensiNeonProfiles")||"[]")}catch(e){return []}}
+function writeProfiles(arr){try{localStorage.setItem("sensiNeonProfiles",JSON.stringify(arr));return true}catch(e){$("profileStatus").textContent="No se pudo guardar: el navegador puede bloquear el almacenamiento.";return false}}
+function renderProfiles(){
+ const arr=readProfiles();$("profiles").innerHTML="";
+ if(!arr.length){$("profileStatus").textContent="Todavía no hay perfiles guardados.";return}
+ arr.forEach((p,i)=>{const b=document.createElement("button");b.className="profilechip";b.textContent="↳ "+p.name;b.title="Cargar perfil";b.onclick=()=>loadProfile(i);$("profiles").append(b)});
+ $("profileStatus").textContent=`${arr.length} perfil(es) guardado(s) en este navegador.`;
+}
+function loadProfile(i){
+ const p=readProfiles()[i];if(!p)return;
+ $("profileName").value=p.name||"Mi perfil";
+ if(p.values)makeRanges(p.values);
+ const s=p.settings||{};["style","fps","touch","dpiMode"].forEach(k=>{if(s[k])$(k).value=s[k]});
+ $("dpiInput").value=s.dpiNote||"";if(s.hud){$("hud").value=s.hud;$("hudVal").textContent=s.hud+"%"}
+ if(p.device)lastDevice=p.device;
+ $("profileStatus").textContent="Perfil cargado: "+p.name;
+}
+function saveProfile(){
+ const p=profileData(), arr=readProfiles();arr.unshift(p);
+ if(arr.length>30)arr.length=30;
+ if(writeProfiles(arr)){renderProfiles();$("profileStatus").textContent="Guardado: "+p.name}
+}
+function downloadJson(data,filename){
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+$("scanBtn").onclick=scan;$("generateBtn").onclick=generate;$("generateTop").onclick=generate;$("batteryBtn").onclick=battery;
+$("resetBtn").onclick=()=>{makeRanges();$("recommendation").textContent="Valores iniciales restaurados. Genera o ajusta tu perfil."};
+$("saveBtn").onclick=saveProfile;
+$("exportBtn").onclick=()=>downloadJson(profileData(),"sensi-neon-perfil.json");
+$("importFile").onchange=async e=>{
+ const f=e.target.files?.[0];if(!f)return;
+ try{const p=JSON.parse(await f.text());if(!p||typeof p!=="object"||!p.values)throw new Error("Formato");
+ const arr=readProfiles();arr.unshift({...p,name:String(p.name||f.name).slice(0,32)});if(writeProfiles(arr)){renderProfiles();$("profileStatus").textContent="Perfil importado. Pulsa su nombre para cargarlo."}
+ }catch(err){$("profileStatus").textContent="Archivo no válido. Importa un JSON exportado desde SENSI AI NEON."}
+ e.target.value="";
+};
+$("hud").oninput=()=>$("hudVal").textContent=$("hud").value+"%";
+makeRanges();renderProfiles();
+</script>
+</body>
+</html>
